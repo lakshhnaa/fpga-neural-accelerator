@@ -39,19 +39,25 @@ An 8×8 systolic-array-based neural network accelerator implemented in Verilog H
 
 ## FSM Waveform
 
-![FSM Waveform](results/screenshots/fsm_waveform.png)
+<p align="center">
+<img src="results/screenshots/fsm_waveform.png" width="900">
+</p>
+
 
 ---
 
 ## Processing Element Waveform
 
-![PE Waveform](results/screenshots/pe_waveform.png)
-
+<p align="center">
+<img src="results/screenshots/pe_waveform.png" width="900">
+</p>
 ---
 
 ## Simulation Result
 
-![Matrix Output](results/screenshots/matrix_output.png)
+<p align="center">
+<img src="results/matrix_output.png" width="900">
+</p>
 
 ---
 
