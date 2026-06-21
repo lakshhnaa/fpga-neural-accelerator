@@ -75,26 +75,48 @@ rtl/
 </p>
 
 ---
+## 🔧 Synthesis Results
+
+![Synthesis flow](diagrams/synthesis.png)
+
+This design was synthesized for an iCE40 FPGA using the open-source Yosys + nextpnr toolchain. Module ports were refactored from unpacked array ports to flattened buses to make the design synthesizable — the original simulation-only RTL used array-typed ports, which don't map to physical I/O on real hardware.
+
+| Metric | Value |
+|---|---|
+| Target device | iCE40 HX8K |
+| LUTs | 2,022 / 7,680 (54%) |
+| Flip-flops | ~4,075 |
+| Carry cells | 1,871 |
+| Max frequency | 95.9 MHz (target 50 MHz, PASS) |
+
+**Toolchain commands:**
+
+```bash
+yosys -p "synth_ice40 -top neural_accelerator_top -json synth.json" rtl/*.v
+nextpnr-ice40 --hx8k --json synth.json --asc out.asc --freq 50
+```
 
 ## 🛠 Tools Used
 
 - Verilog HDL
-- Icarus Verilog
-- GTKWave
+- Icarus Verilog (simulation)
+- GTKWave (waveform analysis)
+- Yosys (synthesis)
+- nextpnr-ice40 (place & route)
 - VS Code
-- Git
-- GitHub
+- Git / GitHub
 
 ---
 
 ## 🚀 Future Improvements
 
-- Parameterized N×N systolic array
-- Fixed-point arithmetic support
+- Deploy to a physical iCE40 FPGA board
+- Parameterized N×N systolic array (currently fixed at 8×8)
+- Fixed-point arithmetic support (currently integer-only)
+- Result-ready/valid handshake signal on output interface
 - BRAM-based memory architecture
 - AXI interface
-- Vivado synthesis and implementation
-- FPGA deployment
+- Run a real inference workload end-to-end (e.g. small MNIST classifier)
 - CNN acceleration
 - TinyML inference engine
 
